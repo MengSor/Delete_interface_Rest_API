@@ -16,7 +16,9 @@ public interface ProductRepository {
     List<CreateProductDto> finByUserId(Long userid);
 
     List<ProductDto> findProducts();
+    List<CreateProductDto> findById(Long id);
     void saveProduct(CreateProductDto productDto);
     void updateProduct(UpdateProductDto productDto , Long id);
     void deleteProduct(Long id);
+
 }

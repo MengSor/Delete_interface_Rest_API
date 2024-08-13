@@ -34,6 +34,14 @@ public class ProductService implements ProductRepository{
     }
 
     @Override
+    public List<CreateProductDto> findById(Long id) {
+        return jdbcClient.sql(StatementUser.FIND_PRO_BY_ID.getStatement())
+                .param(id)
+                .query(CreateProductDto.class)
+                .list();
+    }
+
+    @Override
     public void saveProduct(CreateProductDto productDto) {
         int save = jdbcClient
                 .sql(StatementUser.CREATE_PRODUCT.getStatement())

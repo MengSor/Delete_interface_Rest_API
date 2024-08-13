@@ -3,8 +3,6 @@ package com.example.spring_boot_camel_jdbc_client.route;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-import static org.apache.camel.model.dataformat.JsonLibrary.Gson;
-
 @Builder
 @Getter
 @Setter
@@ -17,4 +15,6 @@ public final class BeanResponse<T> {
     private String massage;
     private int code;
     T data;
+
+// ==============================
 }

@@ -91,6 +91,8 @@ public class UserRoute extends RouteBuilder {
                 //  Get Products
                 .get("/products")
                 .to("direct:findProducts")
+                .get("/products/{id}")
+                .to("direct:findById")
                 .post("/products")
                 .to("direct:saveProduct")
                 .patch("/products/{id}")
@@ -151,12 +153,15 @@ public class UserRoute extends RouteBuilder {
 
         from("direct:deleteUser")
                 .log("Received header: ${header.id}")
-                .bean(UserRepository.class , "deleteUser(${header.id})")
+                .bean(UserController.class , "getUserAll(${header.id})")
                 .log("Deleted user with id ${header.id} successfully");
 
         //  Get Products
         from("direct:findProducts")
                 .bean(ProductRepository.class , "findProducts");
+
+        from("direct:findById")
+                .bean(ProductRepository.class , "findById(${header.id})");
 
         from("direct:saveProduct")
                 .log("Received body: ${body}")

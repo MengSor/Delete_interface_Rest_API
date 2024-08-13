@@ -5,6 +5,7 @@ import com.example.spring_boot_camel_jdbc_client.product.Products;
 import com.example.spring_boot_camel_jdbc_client.product.mapper.CreateProductDto;
 import com.example.spring_boot_camel_jdbc_client.user.User;
 import com.example.spring_boot_camel_jdbc_client.user.UserRepository;
+import org.apache.camel.LoggingLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,13 +66,24 @@ public class MetaDataProcessor {
     private void getUser(List<User> users) {
         for (User user : users) {
 //            deleteProduct(productRepository.findProducts(user.getId()));
-            deleteProducts(productRepository.finByUserId(user.getId()));
+            deleteProducts(productRepository.findById(user.getId()));
             userRepository.deleteUser(user.getId());
         }
     }
     private void deleteProducts(List<CreateProductDto> productDtos) {
+        logger.info("{}",productDtos);
         for (CreateProductDto productDto : productDtos){
             productRepository.deleteProduct(productDto.userid());
         }
+    }
+
+    public void deleteDetail(List<User> users){
+       for (User user : users) {
+           try {
+               userRepository.deleteUser(user.getId());
+           } catch (Exception e) {
+               throw new RuntimeException("Error while deleting ");
+           }
+       }
     }
 }

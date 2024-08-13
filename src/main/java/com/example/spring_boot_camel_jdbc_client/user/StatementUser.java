@@ -11,6 +11,7 @@ public enum StatementUser {
 
     // SQL Products
     FIND_PROdUCT_ALL("SELECT * FROM products"),
+    FIND_PRO_BY_ID("SELECT * FROM products WHERE userid = ?"),
     UPDATE_PRODUCT("UPDATE products SET userid = ? , pro_name = ? , price = ? WHERE pro_id = ?"),
     DELETE_PRODUCT("DELETE FROM products WHERE userid = ?"),
     CREATE_PRODUCT("INSERT INTO products VALUES (?,?,?,?)"),
